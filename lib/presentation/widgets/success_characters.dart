@@ -3,20 +3,17 @@ import 'package:characters_app/data/models/character.dart';
 import 'package:characters_app/presentation/widgets/character_item.dart';
 import 'package:flutter/material.dart';
 
-class SuccessCharacters extends StatefulWidget {
-  const SuccessCharacters({super.key});
+class SuccessCharacters extends StatelessWidget {
+  final List<Character> characters; 
+  
 
-  @override
-  State<SuccessCharacters> createState() => _SuccessCharactersState();
-}
+  const SuccessCharacters({Key? key, required this.characters}) : super(key: key);
 
-class _SuccessCharactersState extends State<SuccessCharacters> {
-    List<Character> allCharacters = [];
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        color: kBackground,
+        color: kScondryColor,
         child: Column(
           children: [
             GridView.builder(
@@ -26,12 +23,12 @@ class _SuccessCharactersState extends State<SuccessCharacters> {
                 crossAxisSpacing: 1,
                 mainAxisSpacing: 1,
               ),
-              itemCount:allCharacters.length ,
+              itemCount: characters.length, // استخدم القائمة الصحيحة
               shrinkWrap: true,
               physics: ClampingScrollPhysics(),
               padding: EdgeInsets.zero,
               itemBuilder: (context, index) {
-                return CharacterItem();
+                return CharacterItem(character: characters[index]);
               },
             ),
           ],

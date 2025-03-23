@@ -13,14 +13,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Character> allCharacters = [ ];
+  List<Character> allCharacters = [];
 
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<CharactersCubit>(
-      context,
-    ).getAllCharacters(); 
+    BlocProvider.of<CharactersCubit>(context).getAllCharacters();
   }
 
   @override
@@ -44,7 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
             return Center(child: CircularProgressIndicator());
           } else if (state is CharactersSuccess) {
             allCharacters = state.characters;
-            return SuccessCharacters();
+            print(state.characters);
+            return SuccessCharacters(characters:allCharacters,);
           } else if (state is CharactersFailure) {
             return Center(child: Text('Error: ${state.errorMessage}'));
           } else {
