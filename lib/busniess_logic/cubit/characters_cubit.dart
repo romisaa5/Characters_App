@@ -9,13 +9,13 @@ class CharactersCubit extends Cubit<CharactersState> {
 
   final CharacterRepo characterRepo;
 
-  Future<void> getAllCharacter() async {
-    emit(CharactersLoading()); 
+  Future<void> getAllCharacters() async {
+    emit(CharactersLoading());
     try {
-      final characters = await characterRepo.getAllCharacters();
-      emit(CharactersSuccess(characters: characters)); 
+      final characters = await characterRepo.getAllCharacters(); // تأكد إنها Future
+      emit(CharactersSuccess(characters: characters));
     } catch (e) {
-      emit(CharactersFailure(errorMessage: e.toString())); 
+      emit(CharactersFailure(errorMessage: e.toString()));
     }
   }
 }
