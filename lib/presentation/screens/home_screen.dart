@@ -14,13 +14,49 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<Character> allCharacters = [];
-
+  bool isSearching = false;
   @override
   void initState() {
     super.initState();
     BlocProvider.of<CharactersCubit>(context).getAllCharacters();
   }
 
+  List<Widget> buildAppBarActions() {
+    if (isSearching) {
+      return [
+        IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.clear, color: kScondryColor),
+        ),
+      ];
+    } else {
+      return [
+        IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.search, color: kScondryColor),
+        ),
+      ];
+    }
+  }
+
+  void startSearching() {
+    ModalRoute.of(
+      context,
+    )!.addLocalHistoryEntry(LocalHistoryEntry(onRemove: _stopSearching));
+    setState(() {
+      isSearching = true;
+    });
+  }
+
+  void _stopSearching() {
+    _clearSearch();
+    setState(() {
+      isSearching = false;
+    });
+  }
+void  _clearSearch(){
+  
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,8 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return Center(child: CircularProgressIndicator());
           } else if (state is CharactersSuccess) {
             allCharacters = state.characters;
-            print(state.characters);
-            return SuccessCharacters(characters:allCharacters,);
+            return SuccessCharacters(characters: allCharacters);
           } else if (state is CharactersFailure) {
             return Center(child: Text('Error: ${state.errorMessage}'));
           } else {

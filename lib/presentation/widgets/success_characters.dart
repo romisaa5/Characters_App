@@ -4,8 +4,8 @@ import 'package:characters_app/presentation/widgets/character_item.dart';
 import 'package:flutter/material.dart';
 
 class SuccessCharacters extends StatelessWidget {
-  final List<Character> characters; 
-  
+  final List<Character> characters;
+ 
 
   const SuccessCharacters({Key? key, required this.characters}) : super(key: key);
 
@@ -23,7 +23,7 @@ class SuccessCharacters extends StatelessWidget {
                 crossAxisSpacing: 1,
                 mainAxisSpacing: 1,
               ),
-              itemCount: characters.length, // استخدم القائمة الصحيحة
+              itemCount: characters.length, 
               shrinkWrap: true,
               physics: ClampingScrollPhysics(),
               padding: EdgeInsets.zero,
