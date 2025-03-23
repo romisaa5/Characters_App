@@ -1,16 +1,26 @@
-# characters_app
+# 📌 characters_app
 
-A new Flutter project.
+**characters_app** is a simple Flutter application that showcases character details. This project is part of my learning journey, where I apply **state management** concepts using **Bloc & Cubit**.
 
-## Getting Started
+## 🚀 Technologies Used
+- **Flutter**
+- **Dart**
+- **Flutter Bloc (Cubit & Bloc)**
 
-This project is a starting point for a Flutter application.
+## 🎯 Project Goals
+- Understand how to **separate business logic from UI**.
+- Manage **different application states** using **Bloc & Cubit**.
+- Implement **efficient state management** in a real-world app.
 
-A few resources to get you started if this is your first Flutter project:
+## 🛠 Features
+- Display a list of characters with their images and details.
+- Use **Cubit** to fetch and display data.
+- Implement **Bloc** to handle different states like **loading, success, and failure**.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📌 Getting Started
+1. Make sure you have **Flutter** and **Dart** installed on your system.
+2. Clone the project:
+   ```bash
+   git clone https://github.com/romisaa5/Characters_App
+   cd characters_app
