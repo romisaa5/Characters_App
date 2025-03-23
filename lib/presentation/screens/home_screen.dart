@@ -1,6 +1,7 @@
 import 'package:characters_app/busniess_logic/cubit/characters_cubit.dart';
 import 'package:characters_app/constants/colors.dart';
 import 'package:characters_app/data/models/character.dart';
+import 'package:characters_app/presentation/widgets/custom_search_field.dart';
 import 'package:characters_app/presentation/widgets/success_characters.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,65 +12,36 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
-
 class _HomeScreenState extends State<HomeScreen> {
   List<Character> allCharacters = [];
+  List<Character> searchedCharacters = [];
   bool isSearching = false;
+
   @override
   void initState() {
     super.initState();
     BlocProvider.of<CharactersCubit>(context).getAllCharacters();
   }
 
-  List<Widget> buildAppBarActions() {
-    if (isSearching) {
-      return [
-        IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.clear, color: kScondryColor),
-        ),
-      ];
-    } else {
-      return [
-        IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.search, color: kScondryColor),
-        ),
-      ];
-    }
-  }
-
-  void startSearching() {
-    ModalRoute.of(
-      context,
-    )!.addLocalHistoryEntry(LocalHistoryEntry(onRemove: _stopSearching));
+  void updateSearch(String searchQuery) {
     setState(() {
-      isSearching = true;
+      isSearching = searchQuery.isNotEmpty;
+      searchedCharacters = allCharacters
+          .where((character) =>
+              character.name.toLowerCase().startsWith(searchQuery.toLowerCase()))
+          .toList();
     });
   }
 
-  void _stopSearching() {
-    _clearSearch();
-    setState(() {
-      isSearching = false;
-    });
-  }
-void  _clearSearch(){
-  
-}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+        automaticallyImplyLeading: false,
         backgroundColor: kPrimaryColor,
-        title: Text(
-          'Characters',
-          style: TextStyle(
-            color: kScondryColor,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+        title: CustomSearchField(
+          allCharacters: allCharacters,
+          onSearch: updateSearch, 
         ),
       ),
       body: BlocBuilder<CharactersCubit, CharactersState>(
@@ -78,7 +50,10 @@ void  _clearSearch(){
             return Center(child: CircularProgressIndicator());
           } else if (state is CharactersSuccess) {
             allCharacters = state.characters;
-            return SuccessCharacters(characters: allCharacters);
+            return SuccessCharacters(
+              characters: isSearching ? searchedCharacters : allCharacters, 
+              
+            );
           } else if (state is CharactersFailure) {
             return Center(child: Text('Error: ${state.errorMessage}'));
           } else {
