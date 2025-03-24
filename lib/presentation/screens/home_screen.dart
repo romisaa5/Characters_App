@@ -7,7 +7,7 @@ import 'package:characters_app/presentation/widgets/custom_search_field.dart';
 import 'package:characters_app/presentation/widgets/success_characters.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+ const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

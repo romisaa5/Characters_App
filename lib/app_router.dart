@@ -1,6 +1,7 @@
 import 'package:characters_app/busniess_logic/cubit/characters_cubit.dart';
 import 'package:characters_app/constants/string.dart';
 import 'package:characters_app/data/Api_services/characters_api_service.dart';
+import 'package:characters_app/data/models/character.dart';
 import 'package:characters_app/data/repos/character_repo.dart';
 import 'package:characters_app/presentation/screens/character_details_screen.dart';
 import 'package:characters_app/presentation/screens/home_screen.dart';
@@ -27,7 +28,8 @@ class AppRouter {
               ),
         );
       case characterDetailsScreen:
-        return MaterialPageRoute(builder: (_) => CharacterDetailsScreen());
+        final character = setting.arguments as Character;
+        return MaterialPageRoute(builder: (_) => CharacterDetailsScreen(character: character,));
       default:
         return MaterialPageRoute(
           builder:

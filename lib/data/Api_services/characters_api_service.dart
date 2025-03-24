@@ -19,11 +19,11 @@ class CharactersApiService {
       if (response.statusCode == 200) {
         return response.data['results']; 
       } else {
-      print("Error: ${response.statusCode}");
+     
         return [];
       }
     } catch (e) {
-      print("Error: ${e.toString()}");
+     
       return [];
     }
   }
